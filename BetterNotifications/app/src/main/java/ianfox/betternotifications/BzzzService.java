@@ -1,13 +1,17 @@
 package ianfox.betternotifications;
 
+import android.annotation.TargetApi;
 import android.app.IntentService;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
+import android.os.Build;
 import android.os.IBinder;
+import android.os.PowerManager;
 import android.os.Vibrator;
 import android.support.annotation.Nullable;
+
 
 import android.util.Log;
 
@@ -24,15 +28,18 @@ public class BzzzService extends Service {
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.KITKAT_WATCH)
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        for (int i = 0; i < 100; i++) {
-            v.vibrate(500);
+        PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        while (true) {
+            if (!pm.isScreenOn()){
+                v.vibrate(500);
+            }
             sleep(1000);
         }
-        return null;
     }
 
     public static void sleep(int duration) {
