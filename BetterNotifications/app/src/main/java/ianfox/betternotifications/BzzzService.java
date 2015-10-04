@@ -10,7 +10,7 @@ import android.os.Build;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.Vibrator;
-import android.app.Notification
+import android.app.Notification;
 import android.support.annotation.Nullable;
 import java.util.Random;
 
