@@ -10,7 +10,9 @@ import android.os.Build;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.Vibrator;
+import android.app.Notification
 import android.support.annotation.Nullable;
+import java.util.Random;
 
 
 import android.util.Log;
@@ -34,11 +36,12 @@ public class BzzzService extends Service {
     public IBinder onBind(Intent intent) {
         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        Random r = new Random();
         while (true) {
             if (!pm.isScreenOn()){
-                v.vibrate(500);
+                v.vibrate(Notification.DEFAULT_VIBRATE);
             }
-            sleep(1000);
+            sleep(r.nextInt(20000) + 10000);
         }
     }
 
