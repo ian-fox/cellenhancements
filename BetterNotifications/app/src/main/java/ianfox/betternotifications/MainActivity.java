@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
     private BzzzService bzzzService; // listens for poses in the background
 
-    // binds stuff to myoService
+    // binds stuff to myService
     private ServiceConnection bzzzServiceConn = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -33,9 +33,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent serviceIntent = new Intent(getApplicationContext(), BzzzService.class);
-        bindService(serviceIntent, bzzzServiceConn, Context.BIND_AUTO_CREATE);
-        startService(serviceIntent);
+        Thread t = new Thread() {
+            public void run() {
+
+                Intent serviceIntent = new Intent(getApplicationContext(), BzzzService.class);
+
+                bindService(serviceIntent, bzzzServiceConn, Context.BIND_AUTO_CREATE);
+
+                startService(serviceIntent);
+            }
+        };
+        t.start();
     }
 
     @Override
@@ -60,3 +68,4 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 }
+

@@ -20,8 +20,9 @@ import android.util.Log;
 /**
  * Created by Ian on 2015-10-04.
  */
-public class BzzzService extends Service {
+public class BzzzService extends IntentService {
     public BzzzService() {
+        super("Bzzz");
     }
 
     public class SBinder extends Binder {
@@ -30,10 +31,8 @@ public class BzzzService extends Service {
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.KITKAT_WATCH)
-    @Nullable
     @Override
-    public IBinder onBind(Intent intent) {
+    protected void onHandleIntent(Intent intent) {
         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         Random r = new Random();
