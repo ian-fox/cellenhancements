@@ -39,7 +39,7 @@ public class BzzzService extends Service {
         Random r = new Random();
         while (true) {
             if (!pm.isScreenOn()){
-                v.vibrate(Notification.DEFAULT_VIBRATE);
+                v.vibrate(500);
             }
             sleep(r.nextInt(20000) + 10000);
         }
