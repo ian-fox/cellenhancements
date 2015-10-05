@@ -19,23 +19,24 @@
         <service android:name=".BzzzService"
             android:enabled="true"
             android:exported="false">
-        </service>
 
+        </service>
+        <receiver android:process=":remote" android:name=".Alarm" android:exported="true">
+            <intent-filter>
+                <action android:name="ianfox.betternotifications.ALARM_RECEIVED" >
+                </action>
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".AutoStart">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+            </intent-filter>
+        </receiver>
     </application>
 
     <uses-permission android:name="android.permission.VIBRATE"/>
     <!--<receiver android:process=":remote" android:name=".Alarm"></receiver>-->
-    <receiver android:name=".Alarm" android:exported="true">
-        <intent-filter>
-            <action android:name="ianfox.betternotifications.START_ALARM" >
-            </action>
-        </intent-filter>
-    </receiver>
-    <receiver android:name=".AutoStart">
-        <intent-filter>
-            <action android:name="android.intent.action.BOOT_COMPLETED"></action>
-        </intent-filter>
-    </receiver>
+
 
 
 </manifest>
